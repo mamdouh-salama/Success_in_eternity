@@ -3,6 +3,7 @@ export interface Lecture {
   title: string;
   slug: string;
   excerpt: string;
+  content: string;
   date: string;
   surah: string;
   surahNumber: number;
@@ -10,6 +11,7 @@ export interface Lecture {
   category: string;
   pdfUrl: string;
   videoId: string;
+  sourceUrl: string;
 }
 
 export interface Video {

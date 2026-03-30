@@ -8,6 +8,7 @@ import {
   Video,
   Tag,
   BookOpen,
+  ExternalLink,
 } from 'lucide-react';
 import { getAllLectures, getLectureBySlug } from '@/lib/content';
 
@@ -30,6 +31,93 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+const ARABIC_RE = /[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]/;
+
+/** True if the paragraph is predominantly Arabic text (>40% Arabic chars). */
+function isArabicParagraph(text: string): boolean {
+  const chars = [...text.trim()];
+  if (chars.length === 0) return false;
+  const arabicCount = chars.filter((c) => ARABIC_RE.test(c)).length;
+  return arabicCount / chars.length > 0.4;
+}
+
+/**
+ * Render a single paragraph, splitting inline Arabic chunks from English text.
+ * Arabic chunks get the `arabic` class; predominantly-Arabic paragraphs get
+ * both `arabic` and `quran-verse` classes.
+ */
+function ParagraphBlock({ text, index }: { text: string; index: number }) {
+  const isArabic = isArabicParagraph(text);
+
+  if (isArabic) {
+    return (
+      <p
+        key={index}
+        className="arabic quran-verse"
+        dir="rtl"
+        style={{
+          fontFamily: 'var(--font-arabic), serif',
+          fontSize: '1.25rem',
+          lineHeight: '2',
+          textAlign: 'right',
+          padding: '0.75rem 1rem',
+          margin: '1.25rem 0',
+          borderRight: '4px solid var(--color-gold)',
+          borderRadius: '0 4px 4px 0',
+          background: 'var(--color-surface)',
+          color: 'var(--color-ink)',
+        }}
+      >
+        {text}
+      </p>
+    );
+  }
+
+  // Mixed paragraph — split inline Arabic runs
+  const parts = text.split(/([^\u0000-\u007F\u0080-\u00FF\u0100-\u024F]*[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF][^\n]*)/g);
+  return (
+    <p key={index} style={{ color: 'var(--color-ink)', lineHeight: '1.85', marginBottom: '1rem' }}>
+      {parts.map((part, j) => {
+        if (ARABIC_RE.test(part) && part.trim().length > 3) {
+          return (
+            <span
+              key={j}
+              className="arabic"
+              dir="rtl"
+              style={{
+                fontFamily: 'var(--font-arabic), serif',
+                fontSize: '1.1em',
+                lineHeight: '2',
+              }}
+            >
+              {part}
+            </span>
+          );
+        }
+        return <span key={j}>{part}</span>;
+      })}
+    </p>
+  );
+}
+
+/** Split content on double newlines and render each block. */
+function ContentRenderer({ content }: { content: string }) {
+  if (!content) return null;
+
+  const paragraphs = content
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+
+  return (
+    <div className="prose prose-custom max-w-none">
+      {paragraphs.map((para, i) => (
+        <ParagraphBlock key={i} text={para} index={i} />
+      ))}
+    </div>
+  );
+}
+
 export default async function LectureDetailPage({ params }: Props) {
   const { slug } = await params;
   const lecture = getLectureBySlug(slug);
@@ -45,22 +133,12 @@ export default async function LectureDetailPage({ params }: Props) {
     )
     .slice(0, 4);
 
-  const hasArabic = /[\u0600-\u06FF]/.test(lecture.title);
+  const hasArabic = ARABIC_RE.test(lecture.title);
 
-  // Split excerpt into parts: detect Arabic portions
-  const renderContent = (text: string) => {
-    // Simple approach: split on Arabic text chunks
-    const parts = text.split(/([\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF][^\n]*[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF])/g);
-    return parts.map((part, i) => {
-      const isArabicChunk = /[\u0600-\u06FF]/.test(part) && part.length > 5;
-      if (isArabicChunk) {
-        return (
-          <span key={i} className="arabic inline">{part}</span>
-        );
-      }
-      return <span key={i}>{part}</span>;
-    });
-  };
+  // Use full content if available, otherwise fall back to excerpt
+  const displayContent = lecture.content && lecture.content.length > lecture.excerpt.length
+    ? lecture.content
+    : lecture.excerpt;
 
   return (
     <div className="container-site animate-fade-in">
@@ -122,12 +200,8 @@ export default async function LectureDetailPage({ params }: Props) {
             ))}
           </div>
 
-          {/* Content */}
-          <div className="prose prose-custom max-w-none">
-            <p className="text-lg leading-relaxed" style={{ color: 'var(--color-ink)' }}>
-              {renderContent(lecture.excerpt)}
-            </p>
-          </div>
+          {/* Full Content */}
+          <ContentRenderer content={displayContent} />
 
           {/* Action buttons */}
           <div className="flex flex-wrap gap-4 mt-10">
@@ -151,6 +225,17 @@ export default async function LectureDetailPage({ params }: Props) {
               >
                 <Video size={18} />
                 Watch Video
+              </a>
+            )}
+            {lecture.sourceUrl && (
+              <a
+                href={lecture.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+              >
+                <ExternalLink size={18} />
+                View Original
               </a>
             )}
           </div>
