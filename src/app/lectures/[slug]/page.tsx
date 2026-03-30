@@ -47,8 +47,46 @@ function arabicRatio(text: string): number {
 function ParagraphBlock({ text, index }: { text: string; index: number }) {
   const ratio = arabicRatio(text);
 
-  // Pure Arabic block (Quranic verse) — >70% Arabic characters
-  if (ratio > 0.7) {
+  // Check if this is a mixed line: English prefix + Arabic verse
+  // e.g. "Allah says: لَيْسَ الْبِرَّ أَنْ تُوَلُّوا..."
+  // Split the English prefix out so it doesn't end up inside the Arabic block
+  const prefixMatch = text.match(
+    /^([^\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]{3,80}?)([:\s]+)([\u0600-\u06FF][\s\S]+)$/
+  );
+  if (prefixMatch && ratio > 0.4) {
+    const [, englishPart, , arabicPart] = prefixMatch;
+    const arabicOnly = arabicRatio(arabicPart);
+    if (arabicOnly > 0.7) {
+      // Render as: English label paragraph + Arabic verse block
+      return (
+        <div key={index}>
+          <p style={{ color: 'var(--color-ink)', lineHeight: '1.85', marginBottom: '0.5rem' }}>
+            {englishPart.trim()}
+          </p>
+          <div
+            dir="rtl"
+            style={{
+              fontFamily: 'var(--font-arabic), serif',
+              fontSize: '1.25rem',
+              lineHeight: '2.2',
+              textAlign: 'right',
+              padding: '1rem 1.25rem',
+              margin: '0.5rem 0 1.5rem 0',
+              borderRight: '4px solid var(--color-gold)',
+              borderRadius: '0 4px 4px 0',
+              background: 'var(--color-surface)',
+              color: 'var(--color-ink)',
+            }}
+          >
+            {arabicPart.trim()}
+          </div>
+        </div>
+      );
+    }
+  }
+
+  // Pure Arabic block (Quranic verse) — >85% Arabic characters, no English prefix
+  if (ratio > 0.85) {
     return (
       <div
         key={index}
@@ -73,13 +111,28 @@ function ParagraphBlock({ text, index }: { text: string; index: number }) {
 
   // For paragraphs with some Arabic (inline), render with proper spans
   if (ARABIC_RE.test(text)) {
-    // Split text into alternating English and Arabic segments
-    const segments = text.split(/([\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF][\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF\u0020-\u0040\u00AB\u00BB\u060C\u061B\u061F\u0640\u064B-\u065F\u0670\uFB50-\uFDFF\uFE70-\uFEFF]*)/g);
+    // Split into segments: non-Arabic text vs Arabic text runs
+    const segments: { text: string; isArabic: boolean }[] = [];
+    let remaining = text;
+    // Match Arabic runs (including tashkeel, spaces between Arabic words, punctuation)
+    const arabicRunRe = /([\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF][\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF\u0020\u060C\u061B\u061F\u0640\u064B-\u065F\u0670]*[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF])/g;
+    let lastIdx = 0;
+    let m;
+    while ((m = arabicRunRe.exec(remaining)) !== null) {
+      if (m.index > lastIdx) {
+        segments.push({ text: remaining.slice(lastIdx, m.index), isArabic: false });
+      }
+      segments.push({ text: m[1], isArabic: true });
+      lastIdx = m.index + m[0].length;
+    }
+    if (lastIdx < remaining.length) {
+      segments.push({ text: remaining.slice(lastIdx), isArabic: false });
+    }
 
     return (
       <p key={index} style={{ color: 'var(--color-ink)', lineHeight: '1.85', marginBottom: '1rem' }}>
         {segments.map((seg, j) => {
-          if (ARABIC_RE.test(seg) && seg.trim().length > 2) {
+          if (seg.isArabic) {
             return (
               <span
                 key={j}
@@ -91,11 +144,11 @@ function ParagraphBlock({ text, index }: { text: string; index: number }) {
                   unicodeBidi: 'embed',
                 }}
               >
-                {seg}
+                {seg.text}
               </span>
             );
           }
-          return <span key={j}>{seg}</span>;
+          return <span key={j}>{seg.text}</span>;
         })}
       </p>
     );
