@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Search, Sun, Moon } from 'lucide-react';
-import { useTheme } from './ThemeProvider';
+import { Menu, X, Search } from 'lucide-react';
 import Logo from './Logo';
 
 const navLinks = [
@@ -18,7 +17,6 @@ const navLinks = [
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const { theme, toggleTheme } = useTheme();
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
@@ -34,11 +32,11 @@ export default function Header() {
         backdropFilter: 'blur(8px)',
       }}
     >
-      <div className="dark:bg-[var(--color-surface-dark)]">
+      <div>
         <nav className="container-site flex items-center justify-between h-16">
           {/* Logo + site name */}
           <Link href="/" className="flex items-center gap-3 group" style={{ color: 'var(--color-ink)' }}>
-            <span style={{ color: 'var(--color-teal)' }} className="dark:text-[var(--color-teal-light)]">
+            <span style={{ color: 'var(--color-teal)' }}>
               <Logo size={36} />
             </span>
             <span
@@ -78,15 +76,6 @@ export default function Header() {
             >
               <Search size={20} />
             </Link>
-
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg transition-colors cursor-pointer"
-              style={{ color: 'var(--color-muted)' }}
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
 
             {/* Mobile hamburger */}
             <button

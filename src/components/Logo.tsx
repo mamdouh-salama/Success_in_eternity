@@ -8,24 +8,23 @@ export default function Logo({ size = 40 }: { size?: number }) {
       xmlns="http://www.w3.org/2000/svg"
       aria-label="Success in Eternity logo"
     >
-      {/* Outer octagonal ring */}
-      <polygon
-        points="24,2 34,6 42,14 46,24 42,34 34,42 24,46 14,42 6,34 2,24 6,14 14,6"
+      {/* Crescent moon */}
+      <path
+        d="M32 6C22.06 6 14 14.06 14 24s8.06 18 18 18c3.08 0 5.98-.78 8.52-2.14C36.2 42.42 30.38 44 24.2 44 12.32 44 2.6 34.51 2.6 22.9S12.32 2 24.2 2c6.1 0 11.6 2.5 15.54 6.52A17.9 17.9 0 0 0 32 6Z"
+        fill="currentColor"
+        opacity="0.15"
+      />
+      <path
+        d="M32 6C22.06 6 14 14.06 14 24s8.06 18 18 18c3.08 0 5.98-.78 8.52-2.14C36.2 42.42 30.38 44 24.2 44 12.32 44 2.6 34.51 2.6 22.9S12.32 2 24.2 2c6.1 0 11.6 2.5 15.54 6.52A17.9 17.9 0 0 0 32 6Z"
         stroke="currentColor"
         strokeWidth="1.5"
         fill="none"
       />
-      {/* Inner 8-pointed star */}
+      {/* Star */}
       <polygon
-        points="24,8 28,18 38,14 32,24 38,34 28,30 24,40 20,30 10,34 16,24 10,14 20,18"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        fill="none"
+        points="40,10 41.5,14 45.5,14 42.2,16.5 43.5,20.5 40,18 36.5,20.5 37.8,16.5 34.5,14 38.5,14"
+        fill="currentColor"
       />
-      {/* Center circle */}
-      <circle cx="24" cy="24" r="4" stroke="currentColor" strokeWidth="1.2" fill="none" />
-      {/* Center dot */}
-      <circle cx="24" cy="24" r="1.5" fill="currentColor" />
     </svg>
   );
 }

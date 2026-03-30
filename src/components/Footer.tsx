@@ -9,7 +9,7 @@ export default function Footer() {
       className="border-t mt-20"
       style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface)' }}
     >
-      <div className="dark:bg-[var(--color-surface-dark)]">
+      <div>
         <div className="container-site py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {/* Brand */}

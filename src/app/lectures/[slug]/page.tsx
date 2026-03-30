@@ -4,12 +4,12 @@ import { notFound } from 'next/navigation';
 import {
   ArrowLeft,
   Calendar,
-  FileText,
   Video,
   Tag,
   BookOpen,
 } from 'lucide-react';
 import { getAllLectures, getLectureBySlug } from '@/lib/content';
+import DownloadPdfButton from '@/components/DownloadPdfButton';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -311,17 +311,12 @@ export default async function LectureDetailPage({ params }: Props) {
 
           {/* Action buttons */}
           <div className="flex flex-wrap gap-4 mt-10">
-            {lecture.pdfUrl && (
-              <a
-                href={lecture.pdfUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                <FileText size={18} />
-                Download PDF
-              </a>
-            )}
+            <DownloadPdfButton
+              title={lecture.title}
+              content={displayContent}
+              date={lecture.date}
+              category={lecture.category}
+            />
             {lecture.videoId && (
               <a
                 href={`https://www.youtube.com/watch?v=${lecture.videoId}`}
@@ -333,7 +328,6 @@ export default async function LectureDetailPage({ params }: Props) {
                 Watch Video
               </a>
             )}
-
           </div>
         </article>
 
