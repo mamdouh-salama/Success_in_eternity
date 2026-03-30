@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* ── Typography ── */
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+  --font-arabic: "Amiri", serif;
+
+  /* ── Light palette ── */
+  --color-cream: #F8F6F1;
+  --color-surface: #FDFCF9;
+  --color-ink: #1C1917;
+  --color-muted: #78716C;
+  --color-teal: #0E7B7F;
+  --color-teal-hover: #0A5F62;
+  --color-teal-light: #5AB4B8;
+  --color-border: #E7E5E4;
+  --color-gold: #B8860B;
+
+  /* ── Dark palette ── */
+  --color-cream-dark: #1A1915;
+  --color-surface-dark: #201F1B;
+  --color-ink-dark: #E7E5E4;
+  --color-muted-dark: #A8A29E;
+  --color-border-dark: #353431;
+}
+
+/* ── Base ── */
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+  --color-cream: var(--color-cream-dark);
+  --color-surface: var(--color-surface-dark);
+  --color-ink: var(--color-ink-dark);
+  --color-muted: var(--color-muted-dark);
+  --color-border: var(--color-border-dark);
+  --color-teal: var(--color-teal-light);
+  --color-teal-hover: #7CCACD;
+  --color-gold: #D4A017;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  line-height: 1.7;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark body styling now handled by variable overrides in .dark */
+
+/* ── Headings ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* ── Arabic text ── */
+.arabic {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  text-align: right;
+  line-height: 2;
+  font-size: 1.15em;
+}
+
+/* ── Links ── */
+a {
+  transition: color 0.2s ease;
+}
+
+/* ── Selection ── */
+::selection {
+  background-color: color-mix(in srgb, var(--color-teal) 25%, transparent);
+  color: var(--color-ink);
+}
+
+/* Dark selection styling now handled by variable overrides in .dark */
+
+/* ── Prose overrides ── */
+.prose-custom {
+  --tw-prose-body: var(--color-ink);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-links: var(--color-teal);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-quotes: var(--color-muted);
+  --tw-prose-quote-borders: var(--color-teal);
+}
+
+/* Dark prose styling now handled by variable overrides in .dark */
+
+/* ── Focus styles ── */
+*:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Dark focus styling now handled by variable overrides in .dark */
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+/* Dark scrollbar styling now handled by variable overrides in .dark */
+
+/* ── Container utility ── */
+.container-site {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* ── Card base ── */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border-color: color-mix(in srgb, var(--color-teal) 30%, var(--color-border));
+  transform: translateY(-1px);
+}
+
+.dark .card:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Badge ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  background-color: color-mix(in srgb, var(--color-teal) 10%, transparent);
+  color: var(--color-teal);
+}
+
+/* Dark badge styling now handled by variable overrides in .dark */
+
+.badge-gold {
+  background-color: color-mix(in srgb, var(--color-gold) 12%, transparent);
+  color: var(--color-gold);
+}
+
+/* ── Button base ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--color-teal);
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-teal-hover);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.dark .btn-primary {
+  color: var(--color-cream-dark);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-teal);
+  background-color: transparent;
+  border: 1px solid var(--color-teal);
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-teal);
+  color: #fff;
+}
+
+.dark .btn-secondary:hover {
+  color: var(--color-cream-dark);
+}
+
+/* ── Page header ── */
+.page-header {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 2.5rem;
+}
+
+/* Dark page-header styling now handled by variable overrides in .dark */
+
+/* ── Animations ── */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
+}
