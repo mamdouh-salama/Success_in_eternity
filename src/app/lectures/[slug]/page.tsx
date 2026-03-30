@@ -8,7 +8,6 @@ import {
   Video,
   Tag,
   BookOpen,
-  ExternalLink,
 } from 'lucide-react';
 import { getAllLectures, getLectureBySlug } from '@/lib/content';
 
@@ -33,35 +32,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const ARABIC_RE = /[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]/;
 
-/** True if the paragraph is predominantly Arabic text (>40% Arabic chars). */
-function isArabicParagraph(text: string): boolean {
-  const chars = [...text.trim()];
-  if (chars.length === 0) return false;
-  const arabicCount = chars.filter((c) => ARABIC_RE.test(c)).length;
-  return arabicCount / chars.length > 0.4;
+/** Count Arabic characters in a string */
+function arabicRatio(text: string): number {
+  const chars = [...text.replace(/\s/g, '')];
+  if (chars.length === 0) return 0;
+  return chars.filter((c) => ARABIC_RE.test(c)).length / chars.length;
 }
 
 /**
- * Render a single paragraph, splitting inline Arabic chunks from English text.
- * Arabic chunks get the `arabic` class; predominantly-Arabic paragraphs get
- * both `arabic` and `quran-verse` classes.
+ * Render a paragraph. Pure Arabic blocks (>70% Arabic) get styled as
+ * Quranic verse blocks. Mixed content gets inline Arabic spans.
+ * English prefixes like "Allah says:" are separated out cleanly.
  */
 function ParagraphBlock({ text, index }: { text: string; index: number }) {
-  const isArabic = isArabicParagraph(text);
+  const ratio = arabicRatio(text);
 
-  if (isArabic) {
+  // Pure Arabic block (Quranic verse) — >70% Arabic characters
+  if (ratio > 0.7) {
     return (
-      <p
+      <div
         key={index}
-        className="arabic quran-verse"
         dir="rtl"
         style={{
           fontFamily: 'var(--font-arabic), serif',
           fontSize: '1.25rem',
-          lineHeight: '2',
+          lineHeight: '2.2',
           textAlign: 'right',
-          padding: '0.75rem 1rem',
-          margin: '1.25rem 0',
+          padding: '1rem 1.25rem',
+          margin: '1.5rem 0',
           borderRight: '4px solid var(--color-gold)',
           borderRadius: '0 4px 4px 0',
           background: 'var(--color-surface)',
@@ -69,38 +67,81 @@ function ParagraphBlock({ text, index }: { text: string; index: number }) {
         }}
       >
         {text}
+      </div>
+    );
+  }
+
+  // For paragraphs with some Arabic (inline), render with proper spans
+  if (ARABIC_RE.test(text)) {
+    // Split text into alternating English and Arabic segments
+    const segments = text.split(/([\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF][\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF\u0020-\u0040\u00AB\u00BB\u060C\u061B\u061F\u0640\u064B-\u065F\u0670\uFB50-\uFDFF\uFE70-\uFEFF]*)/g);
+
+    return (
+      <p key={index} style={{ color: 'var(--color-ink)', lineHeight: '1.85', marginBottom: '1rem' }}>
+        {segments.map((seg, j) => {
+          if (ARABIC_RE.test(seg) && seg.trim().length > 2) {
+            return (
+              <span
+                key={j}
+                dir="rtl"
+                style={{
+                  fontFamily: 'var(--font-arabic), serif',
+                  fontSize: '1.15em',
+                  lineHeight: '2.2',
+                  unicodeBidi: 'embed',
+                }}
+              >
+                {seg}
+              </span>
+            );
+          }
+          return <span key={j}>{seg}</span>;
+        })}
       </p>
     );
   }
 
-  // Mixed paragraph — split inline Arabic runs
-  const parts = text.split(/([^\u0000-\u007F\u0080-\u00FF\u0100-\u024F]*[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF][^\n]*)/g);
+  // Plain English paragraph
   return (
     <p key={index} style={{ color: 'var(--color-ink)', lineHeight: '1.85', marginBottom: '1rem' }}>
-      {parts.map((part, j) => {
-        if (ARABIC_RE.test(part) && part.trim().length > 3) {
-          return (
-            <span
-              key={j}
-              className="arabic"
-              dir="rtl"
-              style={{
-                fontFamily: 'var(--font-arabic), serif',
-                fontSize: '1.1em',
-                lineHeight: '2',
-              }}
-            >
-              {part}
-            </span>
-          );
-        }
-        return <span key={j}>{part}</span>;
-      })}
+      {text}
     </p>
   );
 }
 
-/** Split content on double newlines and render each block. */
+/** Render a bullet/list item */
+function ListItem({ text }: { text: string }) {
+  // Check if it has Arabic inline
+  if (ARABIC_RE.test(text)) {
+    const segments = text.split(/([\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF][\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF\u0020-\u0040\u00AB\u00BB\u060C\u061B\u061F\u0640\u064B-\u065F\u0670\uFB50-\uFDFF\uFE70-\uFEFF]*)/g);
+    return (
+      <li style={{ color: 'var(--color-ink)', lineHeight: '1.85', marginBottom: '0.5rem' }}>
+        {segments.map((seg, j) => {
+          if (ARABIC_RE.test(seg) && seg.trim().length > 2) {
+            return (
+              <span
+                key={j}
+                dir="rtl"
+                style={{
+                  fontFamily: 'var(--font-arabic), serif',
+                  fontSize: '1.1em',
+                  lineHeight: '2',
+                  unicodeBidi: 'embed',
+                }}
+              >
+                {seg}
+              </span>
+            );
+          }
+          return <span key={j}>{seg}</span>;
+        })}
+      </li>
+    );
+  }
+  return <li style={{ color: 'var(--color-ink)', lineHeight: '1.85', marginBottom: '0.5rem' }}>{text}</li>;
+}
+
+/** Split content into paragraphs and render each block. */
 function ContentRenderer({ content }: { content: string }) {
   if (!content) return null;
 
@@ -111,9 +152,21 @@ function ContentRenderer({ content }: { content: string }) {
 
   return (
     <div className="prose prose-custom max-w-none">
-      {paragraphs.map((para, i) => (
-        <ParagraphBlock key={i} text={para} index={i} />
-      ))}
+      {paragraphs.map((para, i) => {
+        // Detect bullet-point lists (lines starting with •, -, or numbered)
+        const lines = para.split('\n').map(l => l.trim()).filter(Boolean);
+        const isList = lines.length > 1 && lines.every(l => /^[•\-\d]+[.)\s]/.test(l));
+        if (isList) {
+          return (
+            <ul key={i} style={{ paddingLeft: '1.5rem', margin: '1rem 0' }}>
+              {lines.map((line, j) => (
+                <ListItem key={j} text={line.replace(/^[•\-\d]+[.)\s]+/, '')} />
+              ))}
+            </ul>
+          );
+        }
+        return <ParagraphBlock key={i} text={para} index={i} />;
+      })}
     </div>
   );
 }
@@ -227,17 +280,7 @@ export default async function LectureDetailPage({ params }: Props) {
                 Watch Video
               </a>
             )}
-            {lecture.sourceUrl && (
-              <a
-                href={lecture.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary"
-              >
-                <ExternalLink size={18} />
-                View Original
-              </a>
-            )}
+
           </div>
         </article>
 
