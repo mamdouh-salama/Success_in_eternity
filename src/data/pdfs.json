@@ -52,5 +52,14 @@
     "pdfUrl": "/books/Jewels-of-the-Quran-Volume-1-Arabic.pdf",
     "relatedLectureSlug": "",
     "relatedVideoSlug": ""
+  },
+  {
+    "id": 8,
+    "title": "تدبر القرآن من خلال دراسة المصطلحات الرئيسية",
+    "slug": "tadabbur-al-quran-arabic",
+    "date": "2026-03-31",
+    "pdfUrl": "/books/Tadabbur-al-Quran-Arabic.pdf",
+    "relatedLectureSlug": "",
+    "relatedVideoSlug": ""
   }
 ]
