@@ -43,5 +43,14 @@
     "pdfUrl": "/books/Jewels-of-the-Quran-Volume-1.pdf",
     "relatedLectureSlug": "",
     "relatedVideoSlug": ""
+  },
+  {
+    "id": 7,
+    "title": "جواهر القرآن: دُرَر الهداية من ثلاثين جزءاً — المجلد الأول: مسالك الحكمة الإلهية (الأجزاء 1–15)",
+    "slug": "jewels-of-the-quran-volume-1-arabic",
+    "date": "2026-03-31",
+    "pdfUrl": "/books/Jewels-of-the-Quran-Volume-1-Arabic.pdf",
+    "relatedLectureSlug": "",
+    "relatedVideoSlug": ""
   }
 ]
