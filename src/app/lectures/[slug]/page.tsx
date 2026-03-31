@@ -286,7 +286,7 @@ export default async function LectureDetailPage({ params }: Props) {
             {lecture.title}
           </h1>
 
-          {/* Date + tags */}
+          {/* Date + tags + Download */}
           <div className="flex flex-wrap items-center gap-4 mb-8 pb-6 border-b" style={{ borderColor: 'var(--color-border)' }}>
             {lecture.date && (
               <span className="flex items-center gap-1.5 text-sm" style={{ color: 'var(--color-muted)' }}>
@@ -304,6 +304,14 @@ export default async function LectureDetailPage({ params }: Props) {
                 {tag}
               </span>
             ))}
+            <span className="ml-auto">
+              <DownloadPdfButton
+                title={lecture.title}
+                content={displayContent}
+                date={lecture.date}
+                category={lecture.category}
+              />
+            </span>
           </div>
 
           {/* Full Content */}
@@ -311,12 +319,6 @@ export default async function LectureDetailPage({ params }: Props) {
 
           {/* Action buttons */}
           <div className="flex flex-wrap gap-4 mt-10">
-            <DownloadPdfButton
-              title={lecture.title}
-              content={displayContent}
-              date={lecture.date}
-              category={lecture.category}
-            />
             {lecture.videoId && (
               <a
                 href={`https://www.youtube.com/watch?v=${lecture.videoId}`}
