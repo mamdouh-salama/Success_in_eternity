@@ -4,7 +4,7 @@ import SearchClient from './SearchClient';
 
 export const metadata: Metadata = {
   title: 'Search — Success in Eternity',
-  description: 'Search across lectures, videos, and PDFs on Success in Eternity.',
+  description: 'Search across lectures, videos, and books on Success in Eternity.',
 };
 
 function SearchFallback() {

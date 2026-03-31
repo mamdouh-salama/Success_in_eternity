@@ -4,9 +4,9 @@ import { FileText, Download, Calendar, BookOpen, Video } from 'lucide-react';
 import { getAllPdfs } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: 'PDF Lecture Library — Success in Eternity',
+  title: 'Books — Success in Eternity',
   description:
-    'Download PDF lecture notes and written materials by Dr. Mamdouh Salama.',
+    'Download books and written materials by Dr. Mamdouh Salama.',
 };
 
 export default function PdfsPage() {
@@ -26,10 +26,10 @@ export default function PdfsPage() {
           className="text-3xl md:text-4xl font-bold"
           style={{ fontFamily: 'var(--font-heading)' }}
         >
-          PDF Lecture Library
+          Books
         </h1>
         <p className="text-sm mt-2" style={{ color: 'var(--color-muted)' }}>
-          {pdfs.length} downloadable document{pdfs.length !== 1 ? 's' : ''}
+          {pdfs.length} downloadable book{pdfs.length !== 1 ? 's' : ''}
         </p>
       </div>
 
@@ -43,7 +43,7 @@ export default function PdfsPage() {
       >
         <FileText size={18} className="mt-0.5 shrink-0" style={{ color: 'var(--color-gold)' }} />
         <p className="text-sm" style={{ color: 'var(--color-ink)' }}>
-          This library is growing. More lecture PDFs will be added as they become available.
+          This library is growing. More books will be added as they become available.
           Check back regularly for new materials.
         </p>
       </div>
@@ -127,10 +127,10 @@ export default function PdfsPage() {
         <div className="text-center py-20">
           <FileText size={48} className="mx-auto mb-4" style={{ color: 'var(--color-muted)' }} />
           <p className="text-lg font-medium" style={{ color: 'var(--color-muted)' }}>
-            No PDFs available yet
+            No books available yet
           </p>
           <p className="text-sm mt-1" style={{ color: 'var(--color-muted)' }}>
-            Check back soon for downloadable lecture materials
+            Check back soon for downloadable books
           </p>
         </div>
       )}

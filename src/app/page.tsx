@@ -169,8 +169,8 @@ export default function HomePage() {
             {
               href: '/pdfs',
               icon: FileText,
-              title: 'PDF Library',
-              desc: 'Downloadable lecture notes and written materials',
+              title: 'Books',
+              desc: 'Downloadable books and written materials',
               color: 'var(--color-teal)',
             },
           ].map((item) => (
