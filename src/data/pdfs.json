@@ -52,5 +52,14 @@
     "pdfUrl": "/books/Tadabbur-al-Quran-Arabic.pdf",
     "relatedLectureSlug": "",
     "relatedVideoSlug": ""
+  },
+  {
+    "id": 9,
+    "title": "Tadabbur of the Quran through the Lens of Key Terms",
+    "slug": "tadabbur-quran-key-terms",
+    "date": "2026-01-19",
+    "pdfUrl": "/books/Tadabbur-of-the-Quran-Key-Terms.pdf",
+    "relatedLectureSlug": "",
+    "relatedVideoSlug": ""
   }
 ]
