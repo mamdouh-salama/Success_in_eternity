@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* Vercel handles Next.js deployment natively — no special config needed */
+  async redirects() {
+    return [
+      {
+        source: '/pdfs',
+        destination: '/books',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

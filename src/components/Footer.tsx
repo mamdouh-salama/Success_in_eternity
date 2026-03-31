@@ -40,7 +40,7 @@ export default function Footer() {
                 {[
                   { href: '/lectures', label: 'Lecture Archive' },
                   { href: '/videos', label: 'Video Archive' },
-                  { href: '/pdfs', label: 'Books' },
+                  { href: '/books', label: 'Books' },
                   { href: '/biography', label: 'About Dr. Salama' },
                   { href: '/search', label: 'Search' },
                 ].map((link) => (

@@ -167,7 +167,7 @@ export default function HomePage() {
               color: 'var(--color-teal)',
             },
             {
-              href: '/pdfs',
+              href: '/books',
               icon: FileText,
               title: 'Books',
               desc: 'Downloadable books and written materials',
