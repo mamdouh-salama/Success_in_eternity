@@ -22,5 +22,13 @@
     "date": "2026-04-04",
     "pdfUrl": "/draft-books/Jewels-of-the-Quran-Volume-2-Juz-16-30.pdf",
     "description": "Ten powerful insights from each Juz of the second half of the Quran, illuminating the moral architecture and divine wisdom of Juz 16–30."
+  },
+  {
+    "id": 4,
+    "title": "The Seerah of the Prophet (PBUH)",
+    "slug": "the-seerah-of-the-prophet",
+    "date": "2026-04-04",
+    "pdfUrl": "/draft-books/The-Seerah-of-the-Prophet-Draft.pdf",
+    "description": "A draft exploration of the life and character of the Prophet (PBUH), covering his tolerance, humility, forgiveness, and enduring legacy."
   }
 ]
