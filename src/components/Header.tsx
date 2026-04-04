@@ -12,6 +12,7 @@ const navLinks = [
   { href: '/lectures', label: 'Lectures' },
   { href: '/videos', label: 'Videos' },
   { href: '/books', label: 'Books' },
+  { href: '/draft-books', label: 'Draft Books' },
 ];
 
 export default function Header() {
