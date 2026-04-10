@@ -310,6 +310,7 @@ export default async function LectureDetailPage({ params }: Props) {
                 content={displayContent}
                 date={lecture.date}
                 category={lecture.category}
+                pdfUrl={lecture.pdfUrl || undefined}
               />
             </span>
           </div>

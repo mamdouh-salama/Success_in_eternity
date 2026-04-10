@@ -7,10 +7,16 @@ interface DownloadPdfButtonProps {
   content: string;
   date?: string;
   category?: string;
+  pdfUrl?: string;
 }
 
-export default function DownloadPdfButton({ title, content, date, category }: DownloadPdfButtonProps) {
+export default function DownloadPdfButton({ title, content, date, category, pdfUrl }: DownloadPdfButtonProps) {
   const handleDownload = () => {
+    // If a direct PDF file is available, just open it
+    if (pdfUrl) {
+      window.open(pdfUrl, '_blank');
+      return;
+    }
     // Build a clean HTML document for printing as PDF
     const printWindow = window.open('', '_blank');
     if (!printWindow) return;
