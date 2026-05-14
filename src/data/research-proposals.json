@@ -30,5 +30,21 @@
     "date": "2026-05-12",
     "pdfUrl": "/research-proposals/Zakat-wal-Daraib-Arabic.pdf",
     "description": "مقترح بحثي يستكشف العلاقة بين الزكاة والضرائب الحديثة نحو إطار متكامل للحوكمة المالية الإسلامية."
+  },
+  {
+    "id": 5,
+    "title": "Validating the Feasibility of Developing the Perfect Translation of the Quran to any Language",
+    "slug": "validating-feasibility-perfect-translation-quran",
+    "date": "2026-05-14",
+    "pdfUrl": "/research-proposals/Validating-Feasibility-Perfect-Translation-Quran.pdf",
+    "description": "A research proposal aimed at developing a methodology for translating the Quran into any language while fully preserving its meaning."
+  },
+  {
+    "id": 6,
+    "title": "التحقق من جدوى تطوير الترجمة المثالية للقرآن الكريم إلى أي لغة",
+    "slug": "al-tarjama-al-mithaliya-arabic",
+    "date": "2026-05-14",
+    "pdfUrl": "/research-proposals/Al-Tarjama-Al-Mithaliya-Arabic.pdf",
+    "description": "مقترح بحثي يهدف إلى تطوير منهجية لترجمة القرآن الكريم إلى أي لغة مع الحفاظ الكامل على معناه."
   }
 ]
