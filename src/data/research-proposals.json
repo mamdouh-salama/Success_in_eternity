@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "id": 1,
+    "title": "The Missing Manuscripts: A Case for Systematic Research into the Earliest Physical Copies of the Quran",
+    "slug": "systematic-research-earliest-physical-copies-quran",
+    "date": "2026-05-12",
+    "pdfUrl": "/research-proposals/Systematic-Research-Earliest-Physical-Copies-Quran.pdf",
+    "description": "A research proposal calling for systematic academic investigation into the oldest surviving physical manuscripts of the Quran."
+  },
+  {
+    "id": 2,
+    "title": "The Relationship Between Zakat and Modern Taxation: Toward an Integrated Framework for Islamic Fiscal Governance",
+    "slug": "zakat-and-modern-taxation",
+    "date": "2026-05-12",
+    "pdfUrl": "/research-proposals/Zakat-and-Modern-Taxation.pdf",
+    "description": "A research proposal exploring the relationship between Zakat and modern taxation toward an integrated framework for Islamic fiscal governance."
+  },
+  {
+    "id": 3,
+    "title": "المخطوطات المفقودة: دعوة إلى البحث المنهجي في أقدم النسخ المادية للقرآن الكريم",
+    "slug": "al-makhtutat-al-mafquda-arabic",
+    "date": "2026-05-12",
+    "pdfUrl": "/research-proposals/Al-Makhtutat-Al-Mafquda-Arabic.pdf",
+    "description": "مقترح بحثي يدعو إلى دراسة منهجية في أقدم النسخ المادية للقرآن الكريم."
+  },
+  {
+    "id": 4,
+    "title": "العلاقة بين الزكاة والضرائب الحديثة: نحو إطار متكامل للحوكمة المالية الإسلامية",
+    "slug": "zakat-wal-daraib-arabic",
+    "date": "2026-05-12",
+    "pdfUrl": "/research-proposals/Zakat-wal-Daraib-Arabic.pdf",
+    "description": "مقترح بحثي يستكشف العلاقة بين الزكاة والضرائب الحديثة نحو إطار متكامل للحوكمة المالية الإسلامية."
+  }
+]
