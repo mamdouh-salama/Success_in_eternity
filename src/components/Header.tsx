@@ -13,6 +13,7 @@ const navLinks = [
   { href: '/videos', label: 'Videos' },
   { href: '/books', label: 'Books' },
   { href: '/draft-books', label: 'Draft Books' },
+  { href: '/research-proposals', label: 'Research Proposals' },
 ];
 
 export default function Header() {
