@@ -46,5 +46,21 @@
     "date": "2026-05-14",
     "pdfUrl": "/research-proposals/Al-Tarjama-Al-Mithaliya-Arabic.pdf",
     "description": "مقترح بحثي يهدف إلى تطوير منهجية لترجمة القرآن الكريم إلى أي لغة مع الحفاظ الكامل على معناه."
+  },
+  {
+    "id": 7,
+    "title": "Toward a Unified Framework of Inheritance Entitlement and Its Corresponding Obligations in Islamic Law",
+    "slug": "toward-unified-framework-inheritance-entitlement",
+    "date": "2026-05-16",
+    "pdfUrl": "/research-proposals/Toward-a-Unified-Framework-of-Inheritance-Entitlement.pdf",
+    "description": "A research proposal toward a unified framework of inheritance entitlement and its corresponding obligations in Islamic law."
+  },
+  {
+    "id": 8,
+    "title": "نحو إطار موحّد للاستحقاق في الإرث وما يقابله من واجبات، في ضوء الفقه الإسلامي",
+    "slug": "nahwa-itar-muwahad-lil-irth-arabic",
+    "date": "2026-05-16",
+    "pdfUrl": "/research-proposals/Nahwa-Itar-Muwahad-Lil-Irth-Arabic.pdf",
+    "description": "مقترح بحثي نحو إطار موحّد للاستحقاق في الإرث وما يقابله من واجبات في ضوء الفقه الإسلامي."
   }
 ]
