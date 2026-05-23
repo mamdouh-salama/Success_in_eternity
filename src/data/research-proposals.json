@@ -62,5 +62,29 @@
     "date": "2026-05-16",
     "pdfUrl": "/research-proposals/Nahwa-Itar-Muwahad-Lil-Irth-Arabic.pdf",
     "description": "مقترح بحثي نحو إطار موحّد للاستحقاق في الإرث وما يقابله من واجبات في ضوء الفقه الإسلامي."
+  },
+  {
+    "id": 9,
+    "title": "Divine Language, Ontological Asymmetry, and the Civilizational Discipline of Meaning",
+    "slug": "divine-language-ontological-asymmetry",
+    "date": "2026-05-23",
+    "pdfUrl": "/research-proposals/Divine-Language-Ontological-Asymmetry.pdf",
+    "description": "A Quranic philosophical study on the nature of divine speech, ontological asymmetry, and the civilizational discipline of meaning."
+  },
+  {
+    "id": 10,
+    "title": "اللغة الإلهية، عدم التماثل الوجودي، والضبط الحضاري للمعنى",
+    "slug": "al-lugha-al-ilahiya-arabic",
+    "date": "2026-05-23",
+    "pdfUrl": "/research-proposals/Al-Lugha-Al-Ilahiya-Arabic.pdf",
+    "description": "دراسة قرآنية فلسفية حول طبيعة الخطاب الإلهي وعدم التماثل الوجودي والضبط الحضاري للمعنى."
+  },
+  {
+    "id": 11,
+    "title": "Response to the Proposal on Zakat and Modern Taxation",
+    "slug": "response-to-zakat-modern-taxation-proposal",
+    "date": "2026-05-21",
+    "pdfUrl": "/research-proposals/Response-to-Zakat-and-Modern-Taxation-Proposal.pdf",
+    "description": "A scholarly response and structural review of the research proposal on Zakat and modern taxation, with substantive observations on two key areas."
   }
 ]
