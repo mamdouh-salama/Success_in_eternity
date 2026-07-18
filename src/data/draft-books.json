@@ -30,5 +30,13 @@
     "date": "2026-04-04",
     "pdfUrl": "/draft-books/The-Seerah-of-the-Prophet-Draft.pdf",
     "description": "A draft exploration of the life and character of the Prophet (PBUH), covering his tolerance, humility, forgiveness, and enduring legacy."
+  },
+  {
+    "id": 5,
+    "title": "جوهر القرآن",
+    "slug": "jawahir-al-quran-arabic",
+    "date": "2026-07-18",
+    "pdfUrl": "/draft-books/Jawahir-al-Quran-Arabic.pdf",
+    "description": "كتاب مسودة حول جوهر القرآن الكريم."
   }
 ]
