@@ -38,5 +38,21 @@
     "date": "2026-07-18",
     "pdfUrl": "/draft-books/Jawahir-al-Quran-Arabic.pdf",
     "description": "كتاب مسودة حول جوهر القرآن الكريم."
+  },
+  {
+    "id": 6,
+    "title": "The Quran: The Framework of Civilization and Salvation",
+    "slug": "the-quran-framework-of-civilization-and-salvation",
+    "date": "2026-07-18",
+    "pdfUrl": "/draft-books/The-Quran-Framework-of-Civilization-and-Salvation.pdf",
+    "description": "A draft book arguing that the challenges facing the Muslim world are not the result of following the Quran too closely, but of not following it closely enough."
+  },
+  {
+    "id": 7,
+    "title": "القرآن: منهج الحضارة وسبيل النجاة",
+    "slug": "al-quran-manhaj-al-hadara-arabic",
+    "date": "2026-07-18",
+    "pdfUrl": "/draft-books/Al-Quran-Manhaj-al-Hadara-Arabic.pdf",
+    "description": "كتاب مسودة يطرح حجةً راسخةً أن القرآن ليس دليلاً على التخلف، بل عدم اتباعه هو السبب الحقيقي."
   }
 ]
