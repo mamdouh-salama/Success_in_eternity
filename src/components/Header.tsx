@@ -14,6 +14,7 @@ const navLinks = [
   { href: '/books', label: 'Books' },
   { href: '/draft-books', label: 'Draft Books' },
   { href: '/research-proposals', label: 'Research Proposals' },
+  { href: '/al-azhar-reviewed', label: 'Al-Azhar Reviewed Books' },
 ];
 
 export default function Header() {

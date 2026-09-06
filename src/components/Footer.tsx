@@ -43,6 +43,7 @@ export default function Footer() {
                   { href: '/books', label: 'Books' },
                   { href: '/draft-books', label: 'Draft Books' },
                   { href: '/research-proposals', label: 'Research Proposals' },
+                  { href: '/al-azhar-reviewed', label: 'Al-Azhar Reviewed Books' },
                   { href: '/biography', label: 'About Dr. Salama' },
                   { href: '/search', label: 'Search' },
                 ].map((link) => (
